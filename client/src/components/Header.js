@@ -8,6 +8,8 @@ function Header() {
   const history = useHistory();
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pictureUrl, setPictureUrl] = useState('');
 
   const handleLogout = async () => {
     try {
@@ -21,6 +23,42 @@ function Header() {
   const handleDeleteAccount = async () => {
     setIsConfirmationOpen(true);
   };
+
+  const handleAddProfilePicture = async () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePictureUrlChange = (e) => {
+    setPictureUrl(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Make a PATCH request to update the profile picture URL
+      const response = await fetch(`/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ picture: pictureUrl }), 
+      });
+  
+      if (response.ok) {
+        // Reload the page to show the new profile picture
+        window.location.reload();
+      } else {
+        console.error('Failed to update profile picture URL');
+      }
+    } catch (error) {
+      console.error('Error updating profile picture URL:', error);
+    }
+  };
+  
   
   const confirmDeleteAccount = async () => {
     try {
@@ -64,8 +102,9 @@ function Header() {
               </span>
               {isDropdownOpen && (
                 <div className="dropdown-menu" style={{ position: 'absolute', top: '100%', backgroundColor: '#333', padding: '10px', borderRadius: '5px', zIndex: 999 }}>
-                  <button onClick={handleLogout} className="dropdown-button" >Logout</button>
-                  <button onClick={handleDeleteAccount} className="dropdown-button ">Delete Account</button>
+                  <button onClick={handleAddProfilePicture} className="dropdown-button">Profile Picture</button>
+                  <button onClick={handleLogout} className="dropdown-button">Logout</button>
+                  <button onClick={handleDeleteAccount} className="dropdown-button">Delete Account</button>
                 </div>
               )}
             </div>
@@ -84,6 +123,21 @@ function Header() {
         onConfirm={confirmDeleteAccount}
         message="Are you sure you want to delete your account? This action cannot be undone."
       />
+      {isModalOpen && (
+        <div className="confirmation-dialog" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 999 }}>
+          <div className="confirmation-dialog-content" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '5px' }}>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="pictureUrl" className="modal-label" style={{ color: 'black' }}>Add a Picture URL to change Profile Picture:</label>
+              <input type="text" id="pictureUrl" name="pictureUrl" value={pictureUrl} onChange={handlePictureUrlChange} className="modal-input" style={{ width: '95%' }}/>
+              <div className="button-container">
+                <button type="submit" className="form-button" style={{ marginRight: '10px' }}>Submit</button>
+                <button type="button" onClick={handleCloseModal} className="delete-button">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      
     </header>
   );
 }
