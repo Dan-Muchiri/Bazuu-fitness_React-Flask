@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAuthStore from './authStore';
 
-
 function MyActivitiesPage() {
   const { isLoggedIn, userId, checkSession } = useAuthStore();
   const [myActivities, setMyActivities] = useState([]);
@@ -32,7 +31,7 @@ function MyActivitiesPage() {
   }, [checkSession, isLoggedIn, userId]);
 
   // Function to render activity cards
-  const renderActivityCards = (activities) => {
+  const renderActivityCards = (activities, isFollowed) => {
     return activities.map(activity => (
       <div key={activity.id} className="activity-card">
         <img src={activity.fitness_activity.picture} className="activity-image" alt={activity.fitness_activity.title} />
@@ -40,9 +39,38 @@ function MyActivitiesPage() {
           <h5 className="activity-title">{activity.fitness_activity.title}</h5>
           <p className="activity-description">{activity.fitness_activity.description}</p>
           <p className="activity-duration">Duration: {activity.fitness_activity.duration} minutes</p>
+          {isFollowed && (
+            <button className="form-button" onClick={() => handleUnfollow(activity.id)}>Unfollow</button>
+          )}
         </div>
       </div>
     ));
+  };
+
+  const handleUnfollow = async (activityId) => {
+    try {
+      const response = await fetch(`/user-fitness-activities/${activityId}`, {
+        method: 'DELETE', // Change method to DELETE
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          fitness_activity_id: activityId,
+          access: 'follower',
+        }),
+      });
+
+      if (response.ok) {
+        // Remove the unfollowed activity from the followedActivities state
+        setFollowedActivities(prevState => prevState.filter(activity => activity.id !== activityId));
+        console.log('Activity unfollowed successfully');
+      } else {
+        console.error('Error unfollowing activity');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -56,7 +84,7 @@ function MyActivitiesPage() {
       <div className="activity-content followed">
         <h2>My Followed Activities</h2>
         <div className="cards">
-          {renderActivityCards(followedActivities)}
+          {renderActivityCards(followedActivities, true)}
         </div>
       </div>
     </div>

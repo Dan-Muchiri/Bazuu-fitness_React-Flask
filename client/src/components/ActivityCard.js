@@ -141,7 +141,7 @@ function ActivityCard({ activity, handleUpdateActivity, handleDeleteActivity }) 
         ) : (
           <div className="button-container">
             <button className="form-button" onClick={() => setShowUpdateForm(true)}>Update or Delete</button>
-            <button type="button" className="form-button" onClick={handleLikeClick}>Like</button>
+            <button type="button" className="form-button" onClick={handleLikeClick}>Follow</button>
           </div>
         )}
       </li>
