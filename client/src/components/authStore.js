@@ -28,18 +28,29 @@ const useAuthStore = create((set) => ({
         },
         body: JSON.stringify(credentials),
       });
-
+  
       if (response.ok) {
         const user = await response.json();
         set({ isLoggedIn: true, userId: user.userId, username: user.username, userPicture: user.picture });
         history.push('/');
       } else {
         const data = await response.json();
-        console.error(data.message);
-        alert('Invalid email or password');
+        if (response.status === 404) {
+          // Email not found
+          console.error(data.error);
+          alert('Email not found');
+        } else if (response.status === 401) {
+          // Invalid password
+          console.error(data.error);
+          alert('Invalid password');
+        } else {
+          console.error(data.message);
+          alert('An error occurred. Please try again later.');
+        }
       }
     } catch (error) {
       console.error('Error occurred:', error);
+      alert('An error occurred. Please try again later.');
     }
   },
   logout: async (history) => {

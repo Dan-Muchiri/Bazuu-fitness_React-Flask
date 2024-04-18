@@ -251,11 +251,15 @@ class Login(Resource):
             return {'message': 'Email and password are required'}, 400
         
         user = User.query.filter_by(email=email).first()
-        if user and user.check_password(password):
+        
+        if not user:
+            return {'error': 'Email not found'}, 404
+        
+        if user.check_password(password):
             session['user_id'] = user.id
             return user.to_dict(), 200
         
-        return {'error': 'Invalid email or password'}, 401
+        return {'error': 'Invalid password'}, 401
 
 
 class Logout(Resource):

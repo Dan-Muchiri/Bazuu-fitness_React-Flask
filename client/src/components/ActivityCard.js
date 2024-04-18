@@ -26,6 +26,12 @@ function ActivityCard({ activity, handleUpdateActivity, handleDeleteActivity }) 
   });
 
   const handleSubmit = async (values) => {
+    if (!isLoggedIn) {
+      // If user is not logged in, redirect to login page
+      alert("Please log in to update!");
+      history.push('/login');
+      return;
+    }
     const updatedActivity = {
       ...activity,
       description: values.description,
@@ -53,6 +59,12 @@ function ActivityCard({ activity, handleUpdateActivity, handleDeleteActivity }) 
   };
 
   const handleDeleteClick = async () => {
+    if (!isLoggedIn) {
+      // If user is not logged in, redirect to login page
+      alert("Please log in to delete!");
+      history.push('/login');
+      return;
+    }
     const response = await fetch(`/fitness-activities/${id}`, {
       method: "DELETE",
     });

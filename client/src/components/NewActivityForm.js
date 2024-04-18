@@ -78,6 +78,8 @@ function NewActivityForm({ onAddActivity }) {
   
       // Step 4: Reset the form fields after successful submission
       resetForm();
+
+      alert("Activity added successfully!");
     } catch (error) {
       console.error('Error occurred:', error);
     }
@@ -91,30 +93,30 @@ function NewActivityForm({ onAddActivity }) {
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form>
-            <div className="form-field">
-              <label htmlFor="title" className="label-bold">Activity Title</label>
-              <Field type="text" name="title" />
-              <ErrorMessage name="title" component="div" className="error-message" />
-            </div>
-            <div className="form-field">
-              <label htmlFor="picture" className="label-bold">Picture URL</label>
-              <Field type="text" name="picture" />
-              <ErrorMessage name="picture" component="div" className="error-message" />
-            </div>
-            <div className="form-field">
-              <label htmlFor="description" className="label-bold">Description</label>
-              <Field type="text" name="description" />
-              <ErrorMessage name="description" component="div" className="error-message" />
-            </div>
-            <div className="form-field">
-              <label htmlFor="duration" className="label-bold">Duration</label>
-              <Field type="number" name="duration" />
-              <ErrorMessage name="duration" component="div" className="error-message" />
-            </div>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Adding..." : "Add Activity"}
-            </button>
-          </Form>
+          <div className="form-field">
+            <label htmlFor="title" className="label-bold">Activity Title</label>
+            <Field type="text" name="title" />
+            <ErrorMessage name="title" component="div" className="error-message" />
+          </div>
+          <div className="form-field">
+            <label htmlFor="picture" className="label-bold">Picture URL</label>
+            <Field type="text" name="picture" />
+            <ErrorMessage name="picture" component="div" className="error-message" />
+          </div>
+          <div className="form-field">
+            <label htmlFor="description" className="label-bold">Description</label>
+            <Field as="textarea" name="description" />
+            <ErrorMessage name="description" component="div" className="error-message" />
+          </div>
+          <div className="form-field">
+            <label htmlFor="duration" className="label-bold">Duration</label>
+            <Field type="number" name="duration" />
+            <ErrorMessage name="duration" component="div" className="error-message" />
+          </div>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Adding..." : "Add Activity"}
+          </button>
+        </Form>
         )}
       </Formik>
       <style>{`
