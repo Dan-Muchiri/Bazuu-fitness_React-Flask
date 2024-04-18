@@ -199,6 +199,16 @@ class UserFitnessActivities(Resource):
 
         data = request.get_json()
 
+        # Check if the user has already followed this activity
+        existing_follow = UserFitnessActivity.query.filter_by(
+            user_id=session['user_id'],
+            fitness_activity_id=data['fitness_activity_id'],
+            access='follower'
+        ).first()
+
+        if existing_follow:
+            return make_response(jsonify({'error': 'User has already followed this activity'}), 400)
+
         new_user_fitness_activity = UserFitnessActivity(
             user_id=session['user_id'],  # Assuming you store user_id in the session
             fitness_activity_id=data['fitness_activity_id'],

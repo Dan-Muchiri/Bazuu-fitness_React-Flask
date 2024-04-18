@@ -100,9 +100,16 @@ function ActivityCard({ activity, handleUpdateActivity, handleDeleteActivity }) 
       });
   
       if (!userFitnessActivityResponse.ok) {
-        // Handle error if adding user fitness activity fails
-        console.error("Error adding user fitness activity:", userFitnessActivityResponse.statusText);
-        return;
+        const errorMessage = await userFitnessActivityResponse.json();
+        if (userFitnessActivityResponse.status === 400 && errorMessage.error === 'User has already followed this activity') {
+          // Display a message to the user indicating that they have already followed this activity
+          alert("You have already followed this activity.");
+          return;
+        } else {
+          // Handle other errors
+          console.error("Error adding user fitness activity:", userFitnessActivityResponse.statusText);
+          return;
+        }
       }
   
       // Notify user that the activity has been liked successfully
@@ -112,6 +119,7 @@ function ActivityCard({ activity, handleUpdateActivity, handleDeleteActivity }) 
       console.error('Error occurred:', error);
     }
   };
+  
   
 
   return (
