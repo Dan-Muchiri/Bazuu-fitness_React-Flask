@@ -25,7 +25,7 @@ app = Flask(
 )
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'secret_key'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.json.compact = False
 
 migrate = Migrate(app, db)
