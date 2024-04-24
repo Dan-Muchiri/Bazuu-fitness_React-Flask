@@ -71,7 +71,7 @@ function NewActivityForm({ onAddActivity }) {
         return;
       }
   
-      const newUserFitnessActivity = await userFitnessActivityResponse.json();
+      
   
       // Step 3: Notify parent component about the new activity
       onAddActivity(newActivity);
