@@ -3,18 +3,27 @@
 # Standard library imports
 
 # Remote library imports
-from flask import Flask, jsonify, request, make_response, session
+import os
+from flask import Flask, jsonify, request, make_response, session,render_template
+
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # Local imports
 from models import FitnessActivity, db, User, UserFitnessActivity
 
 # Instantiate app, set attributes
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret_key'
 app.json.compact = False
@@ -32,9 +41,11 @@ CORS(app)
 
 # Views go here!
 
-@app.route('/')
-def index():
-    return '<h1>Bazuu Fitness</h1>'
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
 
 class FitnessActivities(Resource):
 
