@@ -5,6 +5,7 @@ Bazuu Fitness is a web application designed to help users track their fitness ac
 ## Table of Contents
 
 - [About](#about)
+- [Deployment](#deployment)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -16,6 +17,10 @@ Bazuu Fitness is a web application designed to help users track their fitness ac
 ## About
 
 Bazuu Fitness allows users to create personalized fitness profiles, track their daily workouts, monitor their calorie intake, and set customizable fitness goals. Whether you're a beginner looking to kickstart your fitness journey or an experienced athlete aiming to reach new milestones, Bazuu Fitness has everything you need to succeed.
+
+## Deployment
+
+This site is deployed on [Render](https://bazuu-fitness.onrender.com), a modern platform for building and hosting web applications.
 
 ## Technologies Used
 
