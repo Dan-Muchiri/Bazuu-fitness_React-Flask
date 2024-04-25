@@ -109,7 +109,7 @@ To get started with Bazuu Fitness, follow these steps:
     python server/app.py
     ```
 
-5. **Install dependencies for the frontend client:**
+5. **In a new terminal install dependencies for the frontend client:**
 
     ```bash
     npm install --prefix client
