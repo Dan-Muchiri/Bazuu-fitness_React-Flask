@@ -1,6 +1,6 @@
 # Bazuu Fitness App
 
-Bazuu Fitness is a web application designed to help users track their fitness activities, set fitness goals, and monitor their progress over time. With a user-friendly interface and robust features, Bazuu Fitness makes it easy for users to stay motivated and achieve their fitness goals.
+Bazuu Fitness is a web application designed to revolutionize how individuals approach their fitness journeys. It provides a vibrant and supportive community-driven platform for users to share, discover, and engage with diverse fitness activities and routines. By fostering collaboration and knowledge-sharing, Bazuu Fitness aims to empower users to stay motivated and achieve their fitness goals effectively.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Bazuu Fitness is a web application designed to help users track their fitness ac
 
 ## About
 
-Bazuu Fitness allows users to create personalized fitness profiles, track their daily workouts, monitor their calorie intake, and set customizable fitness goals. Whether you're a beginner looking to kickstart your fitness journey or an experienced athlete aiming to reach new milestones, Bazuu Fitness has everything you need to succeed.
+Bazuu Fitness is a dynamic Fitness platform that serves as a hub for users to share, discover, and engage with diverse fitness activities and routines. By facilitating seamless interaction and information exchange, Bazuu Fitness empowers users to learn from each other, stay motivated, and achieve their fitness goals effectively.
 
 ## Deployment
 
@@ -34,6 +34,7 @@ This site is deployed on [Render](https://bazuu-fitness.onrender.com), a modern 
 - **Backend:**
   - Python
   - Sqlite
+  - Postgresql
   - SqlAlchemy
   - Flask
 - **Authentication:**
