@@ -5,7 +5,6 @@ Bazuu Fitness is a web application designed to revolutionize how individuals app
 ## Table of Contents
 
 - [About](#about)
-- [Deployment](#deployment)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -17,10 +16,6 @@ Bazuu Fitness is a web application designed to revolutionize how individuals app
 ## About
 
 Bazuu Fitness is a dynamic Fitness platform that serves as a hub for users to share, discover, and engage with diverse fitness activities and routines. By facilitating seamless interaction and information exchange, Bazuu Fitness empowers users to learn from each other, stay motivated, and achieve their fitness goals effectively.
-
-## Deployment
-
-This site is deployed on [Render](https://bazuu-fitness.onrender.com), a modern platform for building and hosting web applications.
 
 ## Technologies Used
 
